@@ -159,4 +159,77 @@ h1 {
     transform: translateY(0);
     box-shadow: 0 1px 3px var(--button-shadow);
 }
+#contact-form-section {
+    margin-top: 40px; /* Separate from the lotto generator */
+}
+
+#contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+    text-align: left;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group textarea {
+    padding: 10px;
+    border: 1px solid var(--lotto-number-border);
+    border-radius: 5px;
+    background-color: var(--lotto-number-bg); /* Use similar background for input fields */
+    color: var(--text-color);
+    font-size: 1em;
+    transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group textarea:focus {
+    border-color: var(--generate-btn-bg); /* Highlight on focus */
+    outline: none;
+}
+
+#submit-form-btn {
+    padding: 12px 25px;
+    font-size: 18px;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--generate-btn-bg);
+    color: var(--generate-btn-text);
+    box-shadow: 0 4px 10px var(--button-shadow);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    outline: none;
+    align-self: center; /* Center the button within the flex container */
+    margin-top: 10px;
+}
+
+#submit-form-btn:hover {
+    background-color: var(--generate-btn-hover-bg);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px var(--button-shadow);
+}
+
+#submit-form-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 5px var(--button-shadow);
+}
+
+#form-status {
+    margin-top: 15px;
+    font-weight: bold;
+    color: var(--text-color);
+}
 

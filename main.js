@@ -2,6 +2,10 @@ const lottoNumbersContainer = document.querySelector('.lotto-numbers');
 const generateBtn = document.getElementById('generate-btn');
 const themeToggleBtn = document.getElementById('theme-toggle');
 
+const contactForm = document.getElementById('contact-form');
+const submitFormBtn = document.getElementById('submit-form-btn');
+const formStatus = document.getElementById('form-status');
+
 let currentNumbers = [];
 
 // Theme preference handling
@@ -59,3 +63,49 @@ function generateLottoNumbers() {
 generateBtn.addEventListener('click', generateLottoNumbers);
 
 generateLottoNumbers();
+
+
+// Formspree contact form submission
+contactForm.addEventListener('submit', async (event) => {
+    event.preventDefault(); // Prevent default form submission
+
+    const form = event.target;
+    const data = new FormData(form);
+    const formEndpoint = form.action;
+
+    formStatus.textContent = '문의를 전송 중입니다...';
+    formStatus.style.color = 'var(--text-color)';
+
+    try {
+        const response = await fetch(formEndpoint, {
+            method: 'POST',
+            body: data,
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+
+        if (response.ok) {
+            formStatus.textContent = '문의가 성공적으로 전송되었습니다!';
+            formStatus.style.color = 'green';
+            form.reset(); // Clear the form
+        } else {
+            const responseData = await response.json();
+            if (responseData.errors) {
+                formStatus.textContent = responseData.errors.map(error => error.message).join(', ');
+                formStatus.style.color = 'red';
+            } else {
+                formStatus.textContent = '오류가 발생했습니다. 다시 시도해주세요.';
+                formStatus.style.color = 'red';
+            }
+        }
+    } catch (error) {
+        console.error('Form submission error:', error);
+        formStatus.textContent = '네트워크 오류가 발생했습니다. 다시 시도해주세요.';
+        formStatus.style.color = 'red';
+    } finally {
+        setTimeout(() => {
+            formStatus.textContent = '';
+        }, 5000); // Clear status message after 5 seconds
+    }
+});
