@@ -159,9 +159,7 @@ h1 {
     transform: translateY(0);
     box-shadow: 0 1px 3px var(--button-shadow);
 }
-#contact-form-section {
-    margin-top: 40px; /* Separate from the lotto generator */
-}
+
 
 #contact-form {
     display: flex;
