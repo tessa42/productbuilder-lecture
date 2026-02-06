@@ -1,14 +1,43 @@
+:root {
+    --bg-color: #f0f0f0;
+    --text-color: #333;
+    --container-bg: #ffffff;
+    --lotto-number-bg: #fff;
+    --lotto-number-border: #ccc;
+    --button-bg: #4CAF50;
+    --button-text: #fff;
+    --button-hover-bg: #45a049;
+}
+
+body.dark-mode {
+    --bg-color: #2c2c2c;
+    --text-color: #f0f0f0;
+    --container-bg: #3c3c3c;
+    --lotto-number-bg: #4c4c4c;
+    --lotto-number-border: #666;
+    --button-bg: #555;
+    --button-text: #f0f0f0;
+    --button-hover-bg: #666;
+}
+
 body {
     font-family: sans-serif;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align: center;
     min-height: 100vh;
-    background-color: #f0f0f0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .container {
     text-align: center;
+    background-color: var(--container-bg);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
 }
 
 .lotto-numbers {
@@ -22,14 +51,15 @@ body {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background-color: #fff;
-    border: 2px solid #ccc;
+    background-color: var(--lotto-number-bg);
+    border: 2px solid var(--lotto-number-border);
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 5px;
     font-size: 20px;
     font-weight: bold;
+    transition: background-color 0.3s, border-color 0.3s;
 }
 
 .buttons {
@@ -38,8 +68,23 @@ body {
     justify-content: center;
 }
 
-#generate-btn, #copy-btn {
+#generate-btn, #copy-btn, #theme-toggle {
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    transition: background-color 0.3s;
 }
+
+#generate-btn:hover, #copy-btn:hover, #theme-toggle:hover {
+    background-color: var(--button-hover-bg);
+}
+
+.theme-switch {
+    margin-bottom: 20px;
+    text-align: right; /* Align the toggle to the right */
+}
+
