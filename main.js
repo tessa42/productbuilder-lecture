@@ -1,13 +1,13 @@
 const lottoNumbersContainer = document.querySelector('.lotto-numbers');
 const generateBtn = document.getElementById('generate-btn');
-const copyBtn = document.getElementById('copy-btn');
-const themeToggleBtn = document.getElementById('theme-toggle'); // Get theme toggle button
+const themeToggleBtn = document.getElementById('theme-toggle');
 
 let currentNumbers = [];
 
 // Theme preference handling
 function applyTheme(theme) {
     document.body.classList.toggle('dark-mode', theme === 'dark');
+    themeToggleBtn.textContent = theme === 'dark' ? 'Light Mode' : 'Dark Mode';
 }
 
 // Load saved theme or default to light
@@ -46,24 +46,6 @@ function generateLottoNumbers() {
     });
 }
 
-function copyNumbersToClipboard() {
-    if (currentNumbers.length === 0) {
-        alert('Please generate numbers first!');
-        return;
-    }
-
-    const numbersString = currentNumbers.join(', ');
-    navigator.clipboard.writeText(numbersString)
-        .then(() => {
-            alert('Numbers copied to clipboard!');
-        })
-        .catch(err => {
-            console.error('Failed to copy numbers: ', err);
-            alert('Failed to copy numbers. Please check browser permissions.');
-        });
-}
-
 generateBtn.addEventListener('click', generateLottoNumbers);
-copyBtn.addEventListener('click', copyNumbersToClipboard);
 
 generateLottoNumbers();
