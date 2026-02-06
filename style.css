@@ -10,6 +10,8 @@
     --theme-btn-text: #fff;
     --theme-btn-hover-bg: #5a6268;
     --button-shadow: rgba(0, 0, 0, 0.2);
+    --input-bg: #fdfdfd; /* Light mode input background */
+    --input-border: #ccc; /* Light mode input border */
 }
 
 body.dark-mode {
@@ -24,6 +26,8 @@ body.dark-mode {
     --theme-btn-text: #f0f0f0;
     --theme-btn-hover-bg: #74797e;
     --button-shadow: rgba(0, 0, 0, 0.4);
+    --input-bg: #4c4c4c; /* Dark mode input background */
+    --input-border: #666; /* Dark mode input border */
 }
 
 html {
@@ -160,69 +164,88 @@ h1 {
     box-shadow: 0 1px 3px var(--button-shadow);
 }
 
-
-#contact-form {
+/* Modern Form Styles */
+.modern-form {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    margin-top: 20px;
+    gap: 25px; /* Increased gap for better spacing */
+    margin-top: 30px;
     text-align: left;
 }
 
-.form-group {
-    display: flex;
-    flex-direction: column;
+.form-control {
+    position: relative;
+    margin-bottom: 20px; /* Space for floating label effect */
 }
 
-.form-group label {
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: var(--text-color);
-}
-
-.form-group input[type="text"],
-.form-group input[type="email"],
-.form-group textarea {
-    padding: 10px;
-    border: 1px solid var(--lotto-number-border);
-    border-radius: 5px;
-    background-color: var(--lotto-number-bg); /* Use similar background for input fields */
+.form-control input,
+.form-control textarea {
+    width: 100%;
+    padding: 15px 10px;
+    border: 1px solid var(--input-border);
+    border-radius: 8px; /* More rounded corners */
+    background-color: var(--input-bg);
     color: var(--text-color);
     font-size: 1em;
-    transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+    transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.form-group input[type="text"]:focus,
-.form-group input[type="email"]:focus,
-.form-group textarea:focus {
-    border-color: var(--generate-btn-bg); /* Highlight on focus */
+.form-control input:focus,
+.form-control textarea:focus {
+    border-color: var(--generate-btn-bg);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25); /* Focus glow effect */
     outline: none;
 }
 
-#submit-form-btn {
-    padding: 12px 25px;
-    font-size: 18px;
+.form-control label {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: var(--text-color);
+    font-size: 1em;
+    pointer-events: none; /* Allows click-through to input */
+    transition: all 0.3s ease;
+    background-color: var(--input-bg); /* Background to hide text underneath */
+    padding: 0 5px;
+}
+
+.form-control input:focus + label,
+.form-control input:not(:placeholder-shown) + label,
+.form-control textarea:focus + label,
+.form-control textarea:not(:placeholder-shown) + label {
+    top: -10px; /* Move label up */
+    font-size: 0.8em;
+    color: var(--generate-btn-bg);
+    background-color: var(--container-bg); /* Ensure background matches container */
+}
+
+/* Specific styling for the submit button when it's part of the modern form */
+.modern-submit-btn {
+    padding: 15px 30px;
+    font-size: 1.1em;
+    font-weight: bold;
     cursor: pointer;
     border: none;
-    border-radius: 8px;
+    border-radius: 10px; /* More rounded */
     background-color: var(--generate-btn-bg);
     color: var(--generate-btn-text);
-    box-shadow: 0 4px 10px var(--button-shadow);
+    box-shadow: 0 6px 15px var(--button-shadow);
     transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
     outline: none;
     align-self: center; /* Center the button within the flex container */
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
-#submit-form-btn:hover {
+.modern-submit-btn:hover {
     background-color: var(--generate-btn-hover-bg);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px var(--button-shadow);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px var(--button-shadow);
 }
 
-#submit-form-btn:active {
+.modern-submit-btn:active {
     transform: translateY(0);
-    box-shadow: 0 2px 5px var(--button-shadow);
+    box-shadow: 0 4px 10px var(--button-shadow);
 }
 
 #form-status {
@@ -230,4 +253,3 @@ h1 {
     font-weight: bold;
     color: var(--text-color);
 }
-
