@@ -28,6 +28,15 @@ themeToggleBtn.addEventListener('click', () => {
     localStorage.setItem('theme', newTheme);
 });
 
+function getLottoNumberRange(number) {
+    if (number >= 1 && number <= 10) return 1; // Yellow
+    if (number >= 11 && number <= 20) return 2; // Blue
+    if (number >= 21 && number <= 30) return 3; // Red
+    if (number >= 31 && number <= 40) return 4; // Grey
+    if (number >= 41 && number <= 45) return 5; // Green
+    return 0; // Default or error
+}
+
 function generateLottoNumbers() {
     lottoNumbersContainer.innerHTML = '';
     const numbers = new Set();
@@ -36,12 +45,13 @@ function generateLottoNumbers() {
         numbers.add(randomNumber);
     }
 
-    currentNumbers = Array.from(numbers);
+    currentNumbers = Array.from(numbers).sort((a, b) => a - b); // Sort numbers for better presentation
 
     currentNumbers.forEach(number => {
         const numberDiv = document.createElement('div');
         numberDiv.classList.add('lotto-number');
         numberDiv.textContent = number;
+        numberDiv.setAttribute('data-range', getLottoNumberRange(number)); // Assign data-range attribute
         lottoNumbersContainer.appendChild(numberDiv);
     });
 }

@@ -2,12 +2,13 @@
     --bg-color: #f0f0f0;
     --text-color: #333;
     --container-bg: #ffffff;
-    --lotto-number-bg: #e0e0e0;
-    --lotto-number-border: #ccc;
     --lotto-number-shadow: rgba(0, 0, 0, 0.1);
-    --button-bg: #4CAF50;
-    --button-text: #fff;
-    --button-hover-bg: #45a049;
+    --generate-btn-bg: #007bff; /* Distinct color for Generate Numbers button */
+    --generate-btn-text: #fff;
+    --generate-btn-hover-bg: #0056b3;
+    --theme-btn-bg: #6c757d; /* Theme toggle button color */
+    --theme-btn-text: #fff;
+    --theme-btn-hover-bg: #5a6268;
     --button-shadow: rgba(0, 0, 0, 0.2);
 }
 
@@ -15,12 +16,13 @@ body.dark-mode {
     --bg-color: #2c2c2c;
     --text-color: #f0f0f0;
     --container-bg: #3c3c3c;
-    --lotto-number-bg: #4c4c4c;
-    --lotto-number-border: #666;
     --lotto-number-shadow: rgba(0, 0, 0, 0.4);
-    --button-bg: #555;
-    --button-text: #f0f0f0;
-    --button-hover-bg: #666;
+    --generate-btn-bg: #6a0dad; /* Dark mode distinct color */
+    --generate-btn-text: #f0f0f0;
+    --generate-btn-hover-bg: #530a8a;
+    --theme-btn-bg: #8c9297; /* Dark mode theme toggle button color */
+    --theme-btn-text: #f0f0f0;
+    --theme-btn-hover-bg: #74797e;
     --button-shadow: rgba(0, 0, 0, 0.4);
 }
 
@@ -43,6 +45,7 @@ body {
     color: var(--text-color);
     transition: background-color 0.4s ease, color 0.4s ease;
     padding: 20px;
+    position: relative; /* For absolute positioning of theme switch */
 }
 
 .container {
@@ -52,7 +55,7 @@ body {
     border-radius: 12px;
     box-shadow: 0 10px 25px var(--button-shadow);
     transition: background-color 0.4s ease, box-shadow 0.4s ease;
-    max-width: 500px;
+    max-width: 600px; /* Increased max-width for better alignment */
     width: 100%;
 }
 
@@ -64,61 +67,96 @@ h1 {
 
 .lotto-numbers {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap; /* Ensure single row */
     justify-content: center;
-    gap: 15px; /* Increased gap for better spacing */
+    gap: 10px; /* Adjusted gap for smaller circles */
     margin: 30px 0;
+    overflow-x: auto; /* Enable horizontal scrolling if numbers exceed width */
+    padding-bottom: 5px; /* Space for scrollbar */
 }
 
 .lotto-number {
-    width: 60px; /* Slightly larger circles */
-    height: 60px;
+    flex-shrink: 0; /* Prevent shrinking */
+    width: 45px; /* Smaller circles */
+    height: 45px;
     border-radius: 50%;
-    background-color: var(--lotto-number-bg);
-    border: 2px solid var(--lotto-number-border);
+    /* Background and border will be set by specific color classes or default */
+    border: 2px solid; /* Border color will be decided by specific class */
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 24px; /* Larger font size */
+    font-size: 1.1em; /* Adjusted font size */
     font-weight: bold;
-    color: var(--text-color);
+    color: var(--text-color); /* Default text color, overridden by specific classes */
     box-shadow: 0 4px 8px var(--lotto-number-shadow);
     transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease, box-shadow 0.4s ease;
 }
 
+/* Specific colors for lotto balls based on number ranges */
+.lotto-number[data-range="1"] { background-color: #fbc400; border-color: #fbc400; color: #333; } /* 1-10: Yellow */
+.lotto-number[data-range="2"] { background-color: #69c8f2; border-color: #69c8f2; color: #333; } /* 11-20: Blue */
+.lotto-number[data-range="3"] { background-color: #ff7272; border-color: #ff7272; color: #333; } /* 21-30: Red */
+.lotto-number[data-range="4"] { background-color: #aaaaaa; border-color: #aaaaaa; color: #333; } /* 31-40: Grey */
+.lotto-number[data-range="5"] { background-color: #b0d840; border-color: #b0d840; color: #333; } /* 41-45: Green */
+
 .buttons {
     display: flex;
-    gap: 15px; /* Consistent gap */
+    gap: 15px;
     justify-content: center;
     margin-top: 30px;
 }
 
-#generate-btn, #theme-toggle {
-    padding: 12px 25px; /* More padding for a softer look */
+#generate-btn {
+    padding: 12px 25px;
     font-size: 18px;
     cursor: pointer;
     border: none;
-    border-radius: 8px; /* Slightly more rounded corners */
-    background-color: var(--button-bg);
-    color: var(--button-text);
+    border-radius: 8px;
+    background-color: var(--generate-btn-bg);
+    color: var(--generate-btn-text);
     box-shadow: 0 4px 10px var(--button-shadow);
     transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
     outline: none;
 }
 
-#generate-btn:hover, #theme-toggle:hover {
-    background-color: var(--button-hover-bg);
-    transform: translateY(-2px); /* Subtle lift effect */
+#generate-btn:hover {
+    background-color: var(--generate-btn-hover-bg);
+    transform: translateY(-2px);
     box-shadow: 0 6px 15px var(--button-shadow);
 }
 
-#generate-btn:active, #theme-toggle:active {
+#generate-btn:active {
     transform: translateY(0);
     box-shadow: 0 2px 5px var(--button-shadow);
 }
 
 .theme-switch {
-    margin-bottom: 25px; /* Adjusted margin */
-    text-align: right;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    margin-bottom: 0; /* Reset margin */
+}
+
+#theme-toggle {
+    padding: 8px 15px; /* Smaller padding */
+    font-size: 0.9em; /* Smaller font */
+    font-weight: 300; /* Thinner font */
+    border-radius: 5px;
+    background-color: var(--theme-btn-bg);
+    color: var(--theme-btn-text);
+    box-shadow: 0 2px 5px var(--button-shadow);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    outline: none;
+}
+
+#theme-toggle:hover {
+    background-color: var(--theme-btn-hover-bg);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px var(--button-shadow);
+}
+
+#theme-toggle:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 3px var(--button-shadow);
 }
 
