@@ -1,16 +1,23 @@
-# Lotto Number Generator
+# Project Blueprint
 
-This is a simple web application that generates and displays random lotto numbers.
+## Overview
+This project is a Lotto Number Generator with a contact form. It uses HTML, CSS, and JavaScript, following modern web development practices. It now also includes Google Analytics for tracking.
 
-## Features
+## Style, Design, and Features
 
-*   **Generate Numbers:** Click a button to generate a set of 6 unique random numbers between 1 and 45.
-*   **Display Numbers:** The generated numbers are displayed in a clear and visually appealing way.
-*   **Copy to Clipboard:** A button to copy the generated numbers to the clipboard for easy use.
-*   **Responsive Design:** The layout adapts to different screen sizes.
+### Initial Version
+-   **Lotto Number Generator:** Generates random lottery numbers.
+-   **Theme Switch:** Allows users to toggle between themes.
+-   **Contact Form:** A modern-styled contact form that submits data to Formspree.
+-   **Responsive Design:** Adapts to different screen sizes.
 
-## File Structure
+### Current Version (with Google Analytics)
+-   All features from the initial version are retained.
+-   **Google Analytics Integration:** Added Google Tag Manager (gtag.js) to `index.html` for tracking user interactions and page views.
 
-*   `index.html`: The main HTML file.
-*   `style.css`: The CSS file for styling.
-*   `main.js`: The JavaScript file for the application logic.
+## Plan for Current Change: Add Google Tag Manager Script
+
+### Steps
+1.  **Find all HTML files:** Use `glob` to locate all `.html` files in the project. (Completed)
+2.  **Read file content:** Read the content of each identified HTML file. (Completed for `index.html`)
+3.  **Insert GTM script:** Insert the provided Google Tag Manager script just before the `</head>` closing tag in each HTML file. (Completed for `index.html`)
